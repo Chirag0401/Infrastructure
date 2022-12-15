@@ -1,0 +1,32 @@
+{
+  "variables": {
+    "instance_size": "t3a.small",
+    "base_ami": "ami-0d31d7c9fc9503726",
+    "ami_name": "Node-AMI-Chirag",
+    "vpc_id": "vpc-0b152e664a9181698",
+    "subnet_id": "subnet-02d6324db148b6672",
+    "region": "us-west-2"
+  },
+  "builders": [ 
+  {
+    "type": "amazon-ebs",
+    "access_key": "AKIAWEGFB4YZG2TF2T4B",
+    "secret_key": "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",
+    "region": "us-west-2",
+    "ami_name": "{{user `ami_name`}}",
+    "source_ami": "ami-0d31d7c9fc9503726",
+    "instance_type": "t3a.small",
+    "ssh_username": "ubuntu",
+    "vpc_id": "{{user `vpc_id`}}",
+    "subnet_id": "{{user `subnet_id`}}"
+  }
+],
+  "provisioners": [ 
+    {
+      "type": "shell",
+      "script": "script.sh",
+      "pause_before": "10s",
+      "timeout": "10s"
+    }
+]
+}
